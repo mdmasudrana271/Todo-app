@@ -1,43 +1,52 @@
 import React, { useContext } from "react";
+import { useState } from "react";
 import { StateContext } from "../../context/StateProvider";
-import EditModal from "../EditModal/EditModal";
 
-const TodoCard = ({todo, index}) => {
+const TodoCard = ({ todo, index }) => {
+  const { todos, setTodos, editTodo, setEditTodo } = useContext(StateContext);
 
-    const {todos,setTodos, editTodo} = useContext(StateContext)
+  const [on,setOn] = useState(true) 
 
-    const handleDelete = index => {
-        const newTodos = [...todos];
-        newTodos.splice(index, 1);
-        setTodos(newTodos);
-        localStorage.setItem('todos', JSON.stringify(newTodos));
-      };
-    
-      const handleEdit = (index) => {
-        const newTodos = [...todos];
-        newTodos[index] = editTodo;
-        setTodos(newTodos);
-        localStorage.setItem('todos', JSON.stringify(newTodos));
-      };
+  const handleDelete = (index) => {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
+  };
+
+  const handleEdit = (index) => {
+    // setOn(!on)
+    todos[index] = editTodo;
+    localStorage.setItem("todos", JSON.stringify(todos));
+  };
 
   return (
     <div className="card w-full bg-neutral text-neutral-content">
       <div className="card-body items-center text-center">
-        <h2 className="card-title">{todo}</h2>
+        {
+          on ?
+          <h2 className="card-title">{todo}</h2>
+          :
+          <form onSubmit={handleEdit}  className="mb-4">
+          <input
+            type="text"
+            
+            onBlur={(e)=>setEditTodo(e.target.value)}
+            defaultValue={todo}
+            className="border p-2 rounded text-black"
+          />
+          <button onClick={()=>handleEdit(index)} type="submit" className="bg-blue-500 p-2 rounded text-white">
+            Add
+          </button>
+        </form>
+        }
         <div className="card-actions justify-end">
-          <button className="btn btn-xs" onClick={()=>handleDelete(index)}>Delete</button>
-          {/* <button className="btn btn-ghost" onClick={()=>handleEdit(index)}>Edit</button> */}
-          <label htmlFor="my-modal-3" className="btn btn-xs" onClick={()=>handleEdit(index)}>Edit</label>
+          <button className="btn btn-xs" onClick={() => handleDelete(index)}>
+            Delete
+          </button>
+          <button  onClick={()=> setOn(!on)} className="btn btn-xs">Edit</button>
         </div>
       </div>
-      <section>
-        {
-            todo &&
-            
-                <EditModal  todo={todo}></EditModal>
-                
-        }
-     </section>
     </div>
   );
 };
