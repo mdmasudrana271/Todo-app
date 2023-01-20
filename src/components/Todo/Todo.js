@@ -29,18 +29,18 @@ const {todos,setTodos, newTodo, setNewTodo} = useContext(StateContext)
           onChange={e => setNewTodo(e.target.value)}
           className="border p-2 rounded"
         />
-        <button type="submit" className="bg-blue-500 p-2 rounded text-white">
+        <button type="submit" className="btn-success p-2 rounded text-white">
           Add
         </button>
       </form>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-20">
         {todos?.map((todo, index) => (
         <TodoCard todo={todo} key={index} index={index}></TodoCard>
         ))}
       </div>
      {
         todos?.length > 0 && 
-        <div><button className='btn btn-primary mt-10' onClick={removeall}>Remove All</button></div>
+        <div><button className='btn btn-error mt-10 text-white' onClick={removeall}>Remove All</button></div>
      }
     </div>
   );

@@ -21,7 +21,7 @@ const TodoCard = ({ todo, index }) => {
   };
 
   return (
-    <div className="card w-full bg-neutral text-neutral-content">
+    <div className="card w-full bg-white shadow-lg text-slate-800 border">
       <div className="card-body items-center text-center">
         {
           on ?
@@ -41,10 +41,10 @@ const TodoCard = ({ todo, index }) => {
         </form>
         }
         <div className="card-actions justify-end">
-          <button className="btn btn-xs" onClick={() => handleDelete(index)}>
+          <button className="btn btn-xs btn-error text-white" onClick={() => handleDelete(index)}>
             Delete
           </button>
-          <button  onClick={()=> setOn(!on)} className="btn btn-xs">Edit</button>
+          <button  onClick={()=> setOn(!on)} className="btn btn-xs btn-success text-white">Edit</button>
         </div>
       </div>
     </div>
