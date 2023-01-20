@@ -4,7 +4,7 @@ import EditModal from "../EditModal/EditModal";
 
 const TodoCard = ({todo, index}) => {
 
-    const {todos,setTodos, newTodo, setNewTodo} = useContext(StateContext)
+    const {todos,setTodos, editTodo} = useContext(StateContext)
 
     const handleDelete = index => {
         const newTodos = [...todos];
@@ -13,9 +13,9 @@ const TodoCard = ({todo, index}) => {
         localStorage.setItem('todos', JSON.stringify(newTodos));
       };
     
-      const handleEdit = (index, newValue) => {
+      const handleEdit = (index) => {
         const newTodos = [...todos];
-        newTodos[index] = newValue;
+        newTodos[index] = editTodo;
         setTodos(newTodos);
         localStorage.setItem('todos', JSON.stringify(newTodos));
       };

@@ -8,9 +8,10 @@ const StateProvider = ({children})=>{
         JSON.parse(localStorage.getItem('todos')) || []
       );
       const [newTodo, setNewTodo] = useState('');
+      const [editTodo, setEditTodo] = useState('')
 
 
-    const stateValue={todos, setTodos, newTodo, setNewTodo}
+    const stateValue={todos, setTodos, newTodo, setNewTodo, editTodo, setEditTodo}
     return(
         <StateContext.Provider value={stateValue}>
             {children}

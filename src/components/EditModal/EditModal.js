@@ -1,6 +1,10 @@
 import React from "react";
+import { useContext } from "react";
+import { StateContext } from "../../context/StateProvider";
 
 const EditModal = ({todo}) => {
+
+  const {setEditTodo} = useContext(StateContext)
   
   return (
     <div>
@@ -19,6 +23,7 @@ const EditModal = ({todo}) => {
           <p className="py-4 text-black">
             {todo}
           </p>
+          <input type="text" placeholder="Type here" onBlur={(e)=> setEditTodo(e.target.value)} className="text-black input input-bordered input-accent w-full max-w-xs" />
         </div>
       </div>
     </div>

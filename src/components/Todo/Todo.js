@@ -1,27 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { StateContext } from '../../context/StateProvider';
 import TodoCard from '../TodoCard/TodoCard';
 
 
 function Todo() {
-//   const [todos, setTodos] = useState(
-//     JSON.parse(localStorage.getItem('todos')) || []
-//   );
-//   const [newTodo, setNewTodo] = useState('');
-
-let d = new Date();
-let minutes = d.getMinutes();
-let seconds = d.getSeconds();
-const time ={
-    minutes,
-    seconds
-}
 
 const {todos,setTodos, newTodo, setNewTodo} = useContext(StateContext)
 
   const handleSubmit = event => {
     event.preventDefault();
-    setTodos([...todos, newTodo]);
+    // setTodos([...todos, newTodo]);
+    todos.push(newTodo)
     localStorage.setItem('todos', JSON.stringify(todos));
     setNewTodo('');
   };
